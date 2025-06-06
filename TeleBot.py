@@ -7,7 +7,7 @@ menu1.row(
     telebot.types.InlineKeyboardButton('Зарегистрироваться', callback_data='register')
     )
 
-bot=telebot.TeleBot('')
+bot=telebot.TeleBot('7652378304:AAEMNt7Fk36IbNfzRiOQ7bpGbzFDAbziAmc')
 @bot.message_handler(commands=['start'])
 def start(message):
     bot.send_message(message.from_user.id, f'Добро пожаловать \n'
@@ -22,13 +22,14 @@ def start(message):
 def callback_handler(call):
     if call.data=='help':
         info = database.show_info()
-        bot.send_message(call.message.chat. id, str(info))
+        for name, tel, hotel in info:
+            message = f'Имя: {name}\nТелефонный номер: {tel}\nНомер комнаты: {hotel}'
+            bot.send_message(call.message.chat.id,message)
       #  bot.register_next_step_handler(call.message,help_info)
     elif call.data=='register':
         bot.send_message(call.message.chat.id, 'Введите ваше имя, номер телефона и номер желаемой комнаты через пробел')
         bot.register_next_step_handler(call.message,register)
-def help_info(message):
-    bot.send_message(message.from_user.id, database.show_info)
+
 
 def register(message):
     print(message)

@@ -1,7 +1,7 @@
 import sqlite3
 
-sql=sqlite3.connect('Register_Hostel')
-base=sql.cursor()
+sql=sqlite3.connect('Register_Hostel', check_same_thread = False)
+base=sql.cursor( )
 
 base.execute("""CREATE TABLE IF NOT EXISTS register (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -12,10 +12,9 @@ base.execute("""CREATE TABLE IF NOT EXISTS register (
 
 def add_client(name, tel_number, otel_num):
     base.execute("""INSERT INTO register (name,tel_number,otel_num) VALUES(?,?,?); """,(name,tel_number,otel_num))
-    base.commit()
+    sql.commit()
 def show_info():
-    return base.execute("""SELECT * FROM register """).fetchall()
-
+    return base.execute("SELECT name, tel_number, otel_num FROM register").fetchall()
 
 
 #CREATE	Создание таблиц
