@@ -7,7 +7,7 @@ menu1.row(
     telebot.types.InlineKeyboardButton('Зарегистрироваться', callback_data='register')
     )
 
-bot=telebot.TeleBot('7652378304:AAEMNt7Fk36IbNfzRiOQ7bpGbzFDAbziAmc')
+bot=telebot.TeleBot('')
 @bot.message_handler(commands=['start'])
 def start(message):
     bot.send_message(message.from_user.id, f'Добро пожаловать \n'
